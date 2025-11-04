@@ -29,7 +29,7 @@ Ce dépôt contient une implémentation pratique du **Design Pattern Observer** 
 
 ## 🧩 Schéma de fonctionnement
 | Push | Pop(Pull) |
-|---|---|---|---|---|
+|---|---|
 |![](./captures/result_push.png)|![](./captures/result_pop.png)|
 | Technique de Push | Technique de pull | 
 
