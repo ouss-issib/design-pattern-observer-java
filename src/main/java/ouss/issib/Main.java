@@ -1,17 +1,31 @@
 package ouss.issib;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+import ouss.issib.impl.ObservableImpl;
+import ouss.issib.impl.ObserverImpl1;
+import ouss.issib.impl.ObserverImpl2;
+import ouss.issib.obs.Observer;
+
 public class Main {
     static void main() {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        IO.println(String.format("Hello and welcome!"));
+        ObservableImpl observable = new ObservableImpl();
+        Observer observer1 = new ObserverImpl1();
+        Observer observer2 = new ObserverImpl2();
+        observable.subscribe(observer1);
+        observable.subscribe(observer2);
+        observable.subscribe(new Observer() {
+            @Override
+            public void updateState(int state) {
+                System.out.println("++++++++ ObserverImpl3 : state = " + state +" ++++++++");
+                System.out.println("Res = "+ state * Math.PI);
+            }
+        });
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            IO.println("i = " + i);
-        }
+//        observable.subscribe(state -> {
+//                System.out.println("++++++++ ObserverImpl4 : state = " + state +" ++++++++");
+//                System.out.println("Res = "+ state * Math.PI);
+//        });
+        observable.setState(30);
+        observable.setState(5);
+        observable.notifyObservers();
     }
 }
