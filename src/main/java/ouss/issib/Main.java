@@ -3,6 +3,7 @@ package ouss.issib;
 import ouss.issib.impl.ObservableImpl;
 import ouss.issib.impl.ObserverImpl1;
 import ouss.issib.impl.ObserverImpl2;
+import ouss.issib.obs.Observable;
 import ouss.issib.obs.Observer;
 
 public class Main {
@@ -14,9 +15,11 @@ public class Main {
         observable.subscribe(observer2);
         observable.subscribe(new Observer() {
             @Override
-            public void updateState(int state) {
-                System.out.println("++++++++ ObserverImpl3 : state = " + state +" ++++++++");
-                System.out.println("Res = "+ state * Math.PI);
+            public void updateState(Observable o) {
+                if(!(o instanceof ObservableImpl obs)) return;
+
+                System.out.println("++++++++ ObserverImpl3 : State = " + obs.getState() +" ++++++++");
+                System.out.println("Res = "+ obs.getState() * Math.PI);
             }
         });
 

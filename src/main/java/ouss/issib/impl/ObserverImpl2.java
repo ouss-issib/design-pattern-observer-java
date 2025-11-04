@@ -1,5 +1,6 @@
 package ouss.issib.impl;
 
+import ouss.issib.obs.Observable;
 import ouss.issib.obs.Observer;
 
 import java.util.ArrayList;
@@ -9,7 +10,9 @@ public class ObserverImpl2 implements Observer {
     private List<Integer> history = new ArrayList<>();
 
     @Override
-    public void updateState(int state) {
+    public void updateState(Observable o) {
+        if(!(o instanceof ObservableImpl obs)) return;
+        int state = obs.getState();
         history.add(state);
         double sum =0;
         for(int i=0; i< history.size();i++){

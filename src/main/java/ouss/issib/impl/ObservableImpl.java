@@ -22,7 +22,7 @@ public class ObservableImpl implements Observable {
 
     @Override
     public void notifyObservers() {
-        observers.forEach(o -> o.updateState(state));
+        observers.forEach(o -> o.updateState(this));
     }
 
     public int getState() {
